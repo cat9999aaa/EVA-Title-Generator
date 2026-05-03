@@ -1,0 +1,20 @@
+---
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+---
+
+<section class="content-section faq-section">
+  <div class="section-header">
+    <h2 class="content-heading">{dict.faq.title}</h2>
+    <p class="content-copy">{dict.faq.intro}</p>
+  </div>
+  <div class="faq-list">
+    {dict.faq.items.map((item) => (
+      <details class="faq-item surface-panel">
+        <summary class="faq-question">{item.question}</summary>
+        <p class="faq-answer">{item.answer}</p>
+      </details>
+    ))}
+  </div>
+</section>

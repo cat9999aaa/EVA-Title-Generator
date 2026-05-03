@@ -1,0 +1,11 @@
+---
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+const isChinese = dict.locale === 'zh-CN'
+---
+
+<nav class="language-switcher" aria-label={dict.nav.languageLabel}>
+  <a class="language-link" href="/" data-current={String(isChinese)}>{dict.nav.chinese}</a>
+  <a class="language-link" href="/en" data-current={String(!isChinese)}>{dict.nav.english}</a>
+</nav>

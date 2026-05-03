@@ -1,0 +1,10 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#090909"/>
+  <rect x="48" y="48" width="1104" height="534" rx="12" stroke="#FF6A00" stroke-opacity="0.28" stroke-width="2"/>
+  <line x1="72" y1="144.5" x2="1128" y2="144.5" stroke="#FF6A00" stroke-opacity="0.76"/>
+  <line x1="72" y1="498.5" x2="1128" y2="498.5" stroke="#FF6A00" stroke-opacity="0.76"/>
+  <text x="600" y="300" fill="#FF6A00" font-size="96" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">EVA标题生成器</text>
+  <text x="600" y="360" fill="#FF6A00" fill-opacity="0.72" font-size="34" font-family="Arial, sans-serif" font-weight="600" text-anchor="middle">Online EVA-style title cover generator</text>
+  <text x="84" y="118" fill="#FF6A00" fill-opacity="0.72" font-size="24" font-family="Arial, sans-serif" font-weight="700">AT FIELD // TITLE SYSTEM // READY</text>
+  <text x="84" y="470" fill="#FF6A00" fill-opacity="0.2" font-size="20" font-family="Arial, sans-serif" font-weight="700">X // 16:9 // 21:9 // 4:3 // WeChat // PNG // SVG</text>
+</svg>

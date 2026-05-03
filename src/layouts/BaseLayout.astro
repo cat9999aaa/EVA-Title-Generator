@@ -1,0 +1,57 @@
+---
+import SeoHead from '@/components/SeoHead.astro'
+import type { Dictionary } from '@/lib/i18n/types'
+import '@/styles/tokens.css'
+import '@/styles/base.css'
+import '@/styles/generator.css'
+import '@/styles/eva-effects.css'
+
+const { dict } = Astro.props as { dict: Dictionary }
+const isChinese = dict.locale === 'zh-CN'
+const prefix = isChinese ? '' : '/en'
+const faqPath = `${prefix}/faq`
+const aboutPath = `${prefix}/about`
+const generatorPath = isChinese ? '/' : '/en'
+const currentPath = Astro.url.pathname
+---
+
+<!DOCTYPE html>
+<html lang={dict.htmlLang} data-theme="mono">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <SeoHead dict={dict} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{dict.nav.skipToGenerator}</a>
+    <header class="app-topbar">
+      <span class="app-brand">EVA // TITLE // SYSTEM</span>
+      <nav class="app-nav" aria-label="site navigation">
+        <a
+          class="app-nav-link"
+          href={generatorPath}
+          data-current={String(currentPath === generatorPath || currentPath === generatorPath + '/')}
+        >{dict.nav.generator}</a>
+        <a
+          class="app-nav-link"
+          href={aboutPath}
+          data-current={String(currentPath.startsWith(aboutPath))}
+        >{dict.nav.about}</a>
+        <a
+          class="app-nav-link"
+          href={faqPath}
+          data-current={String(currentPath.startsWith(faqPath))}
+        >{dict.nav.faq}</a>
+      </nav>
+      <nav class="language-switcher" aria-label={dict.nav.languageLabel}>
+        <a class="language-link" href="/" data-current={String(isChinese)}>{dict.nav.chinese}</a>
+        <a class="language-link" href="/en" data-current={String(!isChinese)}>{dict.nav.english}</a>
+      </nav>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+  </body>
+</html>

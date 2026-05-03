@@ -1,0 +1,42 @@
+---
+import ControlPanel from '@/components/ControlPanel.astro'
+import PreviewStage from '@/components/PreviewStage.astro'
+import { DEFAULT_BACKGROUND_OPACITY, DEFAULT_FORMAT_ID, DEFAULT_THEME_ID } from '@/lib/generator/state'
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+
+const generatorCopy = {
+  locale: dict.locale,
+  storageKey: `eva-title-generator:${dict.locale}`,
+  previewLabel: dict.generator.previewLabel,
+  previewReadyHint: dict.generator.previewReadyHint,
+  fontStatusLoading: dict.generator.fontStatusLoading,
+  fontStatusReady: dict.generator.fontStatusReady,
+  fontStatusFallback: dict.generator.fontStatusFallback,
+  formatCopy: dict.generator.formatCopy,
+  themeCopy: dict.generator.themeCopy,
+  defaultContent: dict.generator.defaultContent,
+  defaultFormat: DEFAULT_FORMAT_ID,
+  defaultTheme: DEFAULT_THEME_ID,
+  defaultBackgroundOpacity: DEFAULT_BACKGROUND_OPACITY,
+}
+---
+
+<div class="generator-app" data-generator-app>
+  <script type="application/json" data-generator-copy set:html={JSON.stringify(generatorCopy)}></script>
+  <div class="generator-grid" id="generator-app">
+    <ControlPanel dict={dict} />
+    <PreviewStage dict={dict} />
+  </div>
+</div>
+
+<script>
+  import { initGeneratorApp } from '@/lib/generator/app'
+
+  document.querySelectorAll('[data-generator-app]').forEach((root) => {
+    if (root instanceof HTMLElement) {
+      initGeneratorApp(root)
+    }
+  })
+</script>

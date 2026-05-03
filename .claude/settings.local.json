@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(npx astro:*)",
+      "Bash(which pyftsubset:*)",
+      "Bash(python3 << 'EOF'\n# Generate GB2312 unicode codepoints\nimport struct\n\ngb2312_chars = set\\(\\)\n\n# GB2312 Level 1 \\(zones 16-55\\) and Level 2 \\(zones 56-87\\)\nfor zone in range\\(16, 88\\):\n    for pos in range\\(1, 95\\):\n        b1 = zone + 0xA0\n        b2 = pos + 0xA0\n        try:\n            char = bytes\\([b1, b2]\\).decode\\('gb2312'\\)\n            if char:\n                cp = ord\\(char\\)\n                if cp > 0x3000:  # only CJK, skip control chars\n                    gb2312_chars.add\\(cp\\)\n        except:\n            pass\n\n# Add ASCII printable\nfor cp in range\\(0x0020, 0x007F\\):\n    gb2312_chars.add\\(cp\\)\n\n# Common punctuation blocks\nranges = [\n    \\(0x00A0, 0x00FF\\),  # Latin-1 supplement\n    \\(0x2010, 0x2027\\),  # General punctuation\n    \\(0x2030, 0x205E\\),\n    \\(0x2060, 0x206F\\),\n    \\(0x2190, 0x21FF\\),  # Arrows\n    \\(0x2200, 0x22FF\\),  # Math operators\n    \\(0x2E80, 0x2EFF\\),  # CJK Radicals Supplement\n    \\(0x3000, 0x303F\\),  # CJK Symbols and Punctuation\n    \\(0x3040, 0x30FF\\),  # Hiragana + Katakana\n    \\(0xFE10, 0xFE4F\\),  # CJK Compatibility Forms\n    \\(0xFF00, 0xFFEF\\),  # Halfwidth/Fullwidth Forms\n]\nfor start, end in ranges:\n    for cp in range\\(start, end + 1\\):\n        gb2312_chars.add\\(cp\\)\n\n# Format as comma-separated U+XXXX for pyftsubset\nunicode_str = ','.join\\(f'U+{cp:04X}' for cp in sorted\\(gb2312_chars\\)\\)\n\nwith open\\('/tmp/subset_unicodes.txt', 'w'\\) as f:\n    f.write\\(unicode_str\\)\n\nprint\\(f\"Total codepoints in subset: {len\\(gb2312_chars\\)}\"\\)\nprint\\(f\"CJK chars: {sum\\(1 for c in gb2312_chars if 0x4E00 <= c <= 0x9FFF\\)}\"\\)\nEOF)",
+      "Bash(pyftsubset \\\\\n  /home/cat9999sss/workspace/eva-title-new/public/fonts/Eva-Ming-SC-v0.1.woff2 \\\\\n  --unicodes-file=/tmp/subset_unicodes.txt \\\\\n  --flavor=woff2 \\\\\n  --output-file=/home/cat9999sss/workspace/eva-title-new/public/fonts/Eva-Ming-SC-subset.woff2 \\\\\n  --layout-features='*' \\\\\n  --name-IDs='*' \\\\\n  2>&1 | tail -5\n\nls -lh /home/cat9999sss/workspace/eva-title-new/public/fonts/)",
+      "Read(//home/cat9999sss/**)",
+      "Read(//tmp/**)",
+      "Bash(pyftsubset \\\\\n  /home/cat9999sss/workspace/eva-title-new/tts/Eva-Ming-SC-v0.1.otf \\\\\n  --unicodes=\"U+0020-U+9FFF,U+F900-U+FAFF,U+FE10-U+FEFF,U+FF00-U+FFEF,U+2000-U+206F,U+20A0-U+20CF,U+2100-U+23FF,U+2600-U+27BF\" \\\\\n  --flavor=woff2 \\\\\n  --output-file=/home/cat9999sss/workspace/eva-title-new/public/fonts/Eva-Ming-SC-v0.1.woff2 \\\\\n  --layout-features='*' \\\\\n  --name-IDs='*' \\\\\n  2>&1 | tail -3\n\nls -lh /home/cat9999sss/workspace/eva-title-new/public/fonts/)",
+      "Bash(git init:*)",
+      "Bash(\\\\ git:*)"
+    ]
+  }
+}

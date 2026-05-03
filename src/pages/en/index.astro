@@ -1,0 +1,11 @@
+---
+import GeneratorShell from '@/components/GeneratorShell.astro'
+import AppLayout from '@/layouts/AppLayout.astro'
+import { getDictionary } from '@/lib/i18n'
+
+const dict = getDictionary('en-US')
+---
+
+<AppLayout dict={dict}>
+  <GeneratorShell dict={dict} />
+</AppLayout>

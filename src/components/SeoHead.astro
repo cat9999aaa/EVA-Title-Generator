@@ -1,0 +1,102 @@
+---
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+
+const site = Astro.site ?? new URL('https://eva-title-generator.pages.dev')
+const canonicalUrl = new URL(dict.pagePath, site).toString()
+const imageUrl = new URL('/og/eva-title-generator.svg', site).toString()
+const alternates = [
+  { hrefLang: 'zh-CN', href: new URL('/', site).toString() },
+  { hrefLang: 'en', href: new URL('/en', site).toString() },
+  { hrefLang: 'x-default', href: new URL('/', site).toString() },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: dict.locale,
+  mainEntity: dict.faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+}
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'EVA标题生成器',
+  alternateName: 'EVA Title Generator',
+  applicationCategory: 'DesignApplication',
+  operatingSystem: 'Web Browser',
+  browserRequirements: 'Requires JavaScript and a modern browser.',
+  inLanguage: [dict.locale],
+  description: dict.pageDescription,
+  url: canonicalUrl,
+  image: imageUrl,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  featureList: [
+    'Centered EVA-style title layout',
+    'PNG export',
+    'SVG export',
+    'Bilingual Chinese and English interface',
+    'X, video, PPT, and WeChat cover sizes',
+  ],
+  isBasedOn: 'https://github.com/kaonashi-tyc/Eva-Ming-Simplified',
+}
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'EVA标题生成器',
+  alternateName: 'EVA Title Generator',
+  url: site.toString(),
+  inLanguage: ['zh-CN', 'en-US'],
+  description: dict.pageDescription,
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: dict.locale === 'zh-CN' ? '首页' : 'Home',
+      item: canonicalUrl,
+    },
+  ],
+}
+
+const schemas = [websiteSchema, softwareSchema, faqSchema, breadcrumbSchema]
+---
+
+<title>{dict.pageTitle}</title>
+<meta name="description" content={dict.pageDescription} />
+<meta name="keywords" content={dict.pageKeywords} />
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+<meta name="application-name" content="EVA标题生成器" />
+<meta name="apple-mobile-web-app-title" content="EVA标题生成器" />
+<meta name="theme-color" content="#090909" />
+<link rel="canonical" href={canonicalUrl} />
+{alternates.map((alternate) => <link rel="alternate" hreflang={alternate.hrefLang} href={alternate.href} />)}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="EVA标题生成器" />
+<meta property="og:title" content={dict.pageTitle} />
+<meta property="og:description" content={dict.pageDescription} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:locale" content={dict.locale === 'zh-CN' ? 'zh_CN' : 'en_US'} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={dict.pageTitle} />
+<meta name="twitter:description" content={dict.pageDescription} />
+<meta name="twitter:image" content={imageUrl} />
+<script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>

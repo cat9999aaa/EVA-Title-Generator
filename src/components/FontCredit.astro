@@ -1,0 +1,16 @@
+---
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+---
+
+<section class="content-section">
+  <div class="section-header">
+    <h2 class="content-heading">{dict.credit.title}</h2>
+  </div>
+  <div class="surface-panel credit-panel">
+    <p class="content-copy">{dict.credit.body}</p>
+    <p class="content-copy">{dict.credit.note}</p>
+    <a class="text-link" href={dict.credit.upstreamUrl} target="_blank" rel="noreferrer">{dict.credit.upstreamLabel}</a>
+  </div>
+</section>

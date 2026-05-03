@@ -1,0 +1,67 @@
+---
+import { formatOptions } from '@/lib/config/formats'
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+---
+
+<section class="content-section">
+  <div class="section-header">
+    <h2 class="content-heading">{dict.sections.formatsTitle}</h2>
+    <p class="content-copy">{dict.sections.formatsIntro}</p>
+  </div>
+  <div class="card-grid format-overview-grid">
+    {formatOptions.map((format) => (
+      <article class="info-card surface-panel">
+        <h3 class="info-card-title">{dict.generator.formatCopy[format.id].label}</h3>
+        <p class="info-card-meta">{format.ratio} · {format.width} × {format.height}</p>
+        <p class="info-card-copy">{dict.generator.formatCopy[format.id].hint}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="section-header">
+    <h2 class="content-heading">{dict.sections.useCasesTitle}</h2>
+    <p class="content-copy">{dict.sections.useCasesIntro}</p>
+  </div>
+  <div class="card-grid triple-grid">
+    {dict.sections.useCases.map((item) => (
+      <article class="info-card surface-panel">
+        <h3 class="info-card-title">{item.title}</h3>
+        <p class="info-card-copy">{item.body}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="section-header">
+    <h2 class="content-heading">{dict.sections.workflowTitle}</h2>
+    <p class="content-copy">{dict.sections.workflowIntro}</p>
+  </div>
+  <div class="card-grid triple-grid">
+    {dict.sections.workflow.map((item) => (
+      <article class="info-card surface-panel">
+        <h3 class="info-card-title">{item.title}</h3>
+        <p class="info-card-copy">{item.body}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="section-header">
+    <h2 class="content-heading">{dict.sections.technicalTitle}</h2>
+    <p class="content-copy">{dict.sections.technicalIntro}</p>
+  </div>
+  <div class="card-grid triple-grid">
+    {dict.sections.technical.map((item) => (
+      <article class="info-card surface-panel">
+        <h3 class="info-card-title">{item.title}</h3>
+        <p class="info-card-copy">{item.body}</p>
+      </article>
+    ))}
+  </div>
+</section>

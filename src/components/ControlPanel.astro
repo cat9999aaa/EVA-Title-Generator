@@ -1,0 +1,71 @@
+---
+import { formatOptions } from '@/lib/config/formats'
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+---
+
+<aside class="control-panel" aria-label={dict.generator.title}>
+
+  <!-- FORMAT -->
+  <div class="cp-row">
+    <label class="cp-label" for="format-select">{dict.generator.sections.format}</label>
+    <select class="format-select" id="format-select" data-format-select>
+      {formatOptions.map((f) => (
+        <option value={f.id}>
+          {dict.generator.formatCopy[f.id].label} · {f.ratio} · {f.width}×{f.height}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  <div class="cp-divider"></div>
+
+  <!-- CONTENT -->
+  <div class="cp-group">
+    <div class="cp-duo">
+      <input class="text-field" id="field-series" type="text" autocomplete="off" placeholder={dict.generator.fields.series} />
+      <input class="text-field" id="field-issue" type="text" autocomplete="off" placeholder={dict.generator.fields.issue} />
+    </div>
+    <input class="text-field" id="field-date" type="text" autocomplete="off" placeholder={dict.generator.fields.date} />
+    <input class="text-field text-field--title" id="field-title" type="text" autocomplete="off" placeholder={dict.generator.placeholders.title} />
+    <input class="text-field" id="field-subtitle" type="text" autocomplete="off" placeholder={dict.generator.placeholders.subtitle} />
+  </div>
+
+  <div class="cp-divider"></div>
+
+  <!-- AUTHOR -->
+  <div class="cp-group">
+    <input class="text-field" id="field-author" type="text" autocomplete="off" placeholder={dict.generator.fields.author} />
+    <div class="cp-duo">
+      <input class="text-field" id="field-handle" type="text" autocomplete="off" placeholder={dict.generator.fields.handle} />
+      <input class="text-field" id="field-site" type="text" autocomplete="off" placeholder={dict.generator.fields.site} />
+    </div>
+  </div>
+
+  <div class="cp-divider"></div>
+
+  <!-- BACKGROUND -->
+  <div class="cp-group">
+    <input class="upload-field" id="background-file" type="file" accept="image/*" />
+    <div class="cp-slider-row">
+      <span class="cp-label">{dict.generator.fields.backgroundOpacity}</span>
+      <input class="range-field" id="background-opacity" type="range" min="0" max="100" value="28" />
+      <span class="value-chip" data-bg-opacity-value>28%</span>
+    </div>
+    <button type="button" class="ghost-button" data-clear-background>{dict.generator.buttons.clearBackground}</button>
+  </div>
+
+  <div class="cp-spacer"></div>
+
+  <!-- ACTIONS -->
+  <div class="cp-actions">
+    <div class="action-row">
+      <button type="button" class="primary-button" data-export-png>{dict.generator.buttons.exportPng}</button>
+      <button type="button" class="secondary-button" data-export-svg>{dict.generator.buttons.exportSvg}</button>
+    </div>
+    <p class="font-status" data-font-status aria-live="polite"></p>
+    <button type="button" class="ghost-button" data-reset>{dict.generator.buttons.reset}</button>
+  </div>
+
+</aside>

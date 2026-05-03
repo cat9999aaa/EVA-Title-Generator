@@ -1,0 +1,26 @@
+---
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+const isChinese = dict.locale === 'zh-CN'
+const prefix = isChinese ? '' : '/en'
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="footer-brand">EVA TITLE GENERATOR</span>
+      <p class="footer-desc">{dict.footer.description}</p>
+      <p class="footer-credit">{dict.footer.credit}</p>
+    </div>
+    <nav class="footer-nav" aria-label="footer navigation">
+      <a class="footer-link" href={isChinese ? '/' : '/en'}>{dict.nav.generator}</a>
+      <a class="footer-link" href={`${prefix}/about`}>{dict.nav.about}</a>
+      <a class="footer-link" href={`${prefix}/faq`}>{dict.nav.faq}</a>
+      <a class="footer-link" href={dict.credit.upstreamUrl} target="_blank" rel="noreferrer">{isChinese ? '字体项目' : 'Font project'}</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span>{dict.footer.note}</span>
+  </div>
+</footer>

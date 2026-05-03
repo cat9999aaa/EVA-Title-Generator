@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'EvaMing';
+  src: url('/fonts/Eva-Ming-SC-v0.1.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-ui: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-eva: 'EvaMing', 'Source Han Serif SC', 'Noto Serif SC', serif;
+  --site-max-width: 1440px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  /* default: mono (black & white) */
+  --theme-base: #000000;
+  --theme-accent: #e8e8e8;
+  --theme-accent-rgb: 232 232 232;
+  --theme-accent-soft: rgb(232 232 232 / 0.72);
+  --theme-accent-faint: rgb(232 232 232 / 0.18);
+  --theme-accent-hairline: rgb(232 232 232 / 0.1);
+  --theme-text-strong: #e8e8e8;
+  --theme-text-muted: rgb(232 232 232 / 0.78);
+  --theme-panel: rgb(232 232 232 / 0.06);
+  --theme-panel-border: rgb(232 232 232 / 0.24);
+  --theme-surface: rgb(232 232 232 / 0.08);
+  --theme-shadow: rgb(232 232 232 / 0.24);
+  color-scheme: dark;
+}

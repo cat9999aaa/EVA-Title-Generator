@@ -1,0 +1,44 @@
+---
+import { themeOptions } from '@/lib/config/themes'
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+---
+
+<section class="preview-stage" aria-label={dict.generator.previewLabel}>
+
+  <!-- Top bar: dim info -->
+  <div class="preview-topbar">
+    <p class="preview-dim" data-dim-bar></p>
+    <p class="preview-hint">{dict.generator.previewReadyHint}</p>
+  </div>
+
+  <!-- Canvas -->
+  <div class="preview-shell" data-parallax-stage>
+    <canvas class="ambient-canvas" data-eva-grid aria-hidden="true"></canvas>
+    <div class="preview-viewport" data-preview-viewport>
+      <div class="preview-frame" data-preview-frame>
+        <div class="preview-svg" data-preview-svg></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Theme strip -->
+  <div class="theme-strip" role="group" aria-label={dict.generator.sections.theme}>
+    {themeOptions.map((theme) => (
+      <button
+        type="button"
+        class="theme-chip"
+        data-theme-button
+        data-theme-id={theme.id}
+        aria-pressed="false"
+        title={dict.generator.themeCopy[theme.id].label}
+      >
+        <span class="theme-chip-base" style={`background:${theme.base}`}></span>
+        <span class="theme-chip-accent" style={`background:${theme.accent}`}></span>
+      </button>
+    ))}
+    <span class="theme-strip-label" aria-hidden="true">{dict.generator.sections.theme}</span>
+  </div>
+
+</section>

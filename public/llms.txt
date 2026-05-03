@@ -1,0 +1,36 @@
+# EVA标题生成器 / EVA Title Generator
+
+Site: https://eva-title-generator.pages.dev
+Primary languages: zh-CN, en-US
+Type: bilingual static website with an interactive EVA-style title cover generator
+
+## Summary
+
+EVA标题生成器 is a bilingual Chinese and English web app for generating EVA-inspired title cover images.
+It supports multiple output sizes for X, video covers, slides, WeChat headers, and ultrawide banners.
+The generator exports both PNG and SVG.
+
+## Core capabilities
+
+- Always-centered title composition across all themes
+- Two-color EVA-style themes
+- Mobile and desktop responsive preview stage
+- PNG export for immediate publishing
+- SVG export for further editing
+- Chinese and English UI and content support
+
+## Font source and homage
+
+The generator uses the Eva-Ming-SC font in this repository.
+The site explicitly pays tribute to: https://github.com/kaonashi-tyc/Eva-Ming-Simplified
+
+## Main pages
+
+- / : Chinese homepage
+- /en : English homepage
+
+## Important user-facing facts
+
+- The site is designed for non-commercial use in its current setup.
+- Titles and subtitles are centered in every theme.
+- Preview is scaled to fit the stage, while exports keep the original resolution.
