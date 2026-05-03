@@ -75,6 +75,7 @@ export const enUS: Dictionary = {
       f169: { label: '16:9', hint: 'For YouTube, presentations, and general video thumbnails.' },
       f219: { label: '21:9 ultrawide', hint: 'For banners, ultrawide wallpapers, and large-screen displays.' },
       f43: { label: '4:3', hint: 'For article headers, retro layouts, and printable cards.' },
+      f11: { label: '1:1 Square', hint: 'For Instagram posts, avatars, Xiaohongshu covers, and square cards.' },
       wechat: { label: 'WeChat cover', hint: 'For narrow article covers and compact social graphics.' },
     },
     themeCopy: {

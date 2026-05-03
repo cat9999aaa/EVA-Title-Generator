@@ -75,6 +75,7 @@ export const zhCN: Dictionary = {
       f169: { label: '16:9', hint: '适合 YouTube、B 站、演示文稿封面。' },
       f219: { label: '21:9 超宽', hint: '适合横幅、超宽屏壁纸和大屏展示。' },
       f43: { label: '4:3', hint: '适合文章头图、复古风展示和打印内容。' },
+      f11: { label: '1:1 方图', hint: '适合 Instagram、头像、小红书封面和正方形卡片。' },
       wechat: { label: '微信封面', hint: '适合微信公众号首图和窄幅信息卡。' },
     },
     themeCopy: {
