@@ -90,7 +90,7 @@ dist/
 
 1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com)
 2. 左侧导航 → **Workers & Pages** → **Create** → **Pages**
-3. 选择 **Connect to Git** → 授权 GitHub → 选择 `eva-title-new` 仓库
+3. 选择 **Connect to Git** → 授权 GitHub → 选择本仓库
 4. 配置构建：
 
    | 项目 | 值 |
@@ -103,7 +103,19 @@ dist/
 
 5. 点击 **Save and Deploy**
 
-部署完成后 Cloudflare 会分配一个 `*.pages.dev` 域名，之后每次 `git push` 自动触发重新部署。
+部署完成后 Cloudflare 会分配一个 `*.pages.dev` 域名。
+
+#### 已绑定仓库后如何更新站点
+
+**推送即部署，无需任何手动操作。**
+
+```
+本地改代码 → git push → Cloudflare 自动检测到新提交 → 拉取构建 → 上线
+```
+
+整个流程约 1–2 分钟。可在 Cloudflare Dashboard → **Workers & Pages** → 你的项目 → **Deployments** 标签页实时查看构建日志和状态。
+
+> 如果只想预览某个分支而不影响生产环境，推送到非 `main` 分支即可——Cloudflare Pages 会为每个分支生成独立的预览 URL。
 
 ---
 
