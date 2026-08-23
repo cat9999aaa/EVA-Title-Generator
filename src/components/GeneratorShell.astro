@@ -24,7 +24,7 @@ const generatorCopy = {
 ---
 
 <div class="generator-app" data-generator-app>
-  <script type="application/json" data-generator-copy set:html={JSON.stringify(generatorCopy)}></script>
+  <script is:inline type="application/json" data-generator-copy set:html={JSON.stringify(generatorCopy)}></script>
   <div class="generator-grid" id="generator-app">
     <ControlPanel dict={dict} />
     <PreviewStage dict={dict} />

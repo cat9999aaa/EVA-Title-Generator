@@ -1,30 +1,10 @@
-@font-face {
-  font-family: 'EvaMing';
-  src: url('/fonts/Eva-Ming-SC-v0.1.woff2') format('woff2');
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-:root {
-  --font-ui: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-eva: 'EvaMing', 'Source Han Serif SC', 'Noto Serif SC', serif;
-  --site-max-width: 1440px;
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
-  /* default: mono (black & white) */
-  --theme-base: #000000;
-  --theme-accent: #e8e8e8;
-  --theme-accent-rgb: 232 232 232;
-  --theme-accent-soft: rgb(232 232 232 / 0.72);
-  --theme-accent-faint: rgb(232 232 232 / 0.18);
-  --theme-accent-hairline: rgb(232 232 232 / 0.1);
-  --theme-text-strong: #e8e8e8;
-  --theme-text-muted: rgb(232 232 232 / 0.78);
-  --theme-panel: rgb(232 232 232 / 0.06);
-  --theme-panel-border: rgb(232 232 232 / 0.24);
-  --theme-surface: rgb(232 232 232 / 0.08);
-  --theme-shadow: rgb(232 232 232 / 0.24);
-  color-scheme: dark;
+@font-face{font-family:EvaMing;src:url('/fonts/Eva-Ming-SC-v0.1.woff2') format('woff2');font-weight:400 900;font-style:normal;font-display:swap}
+:root{
+ --void:#080806;--panel:#10100e;--bone:#e9e4d8;--muted:#8d8b83;--signal:#b9d82e;--alert:#d5472b;
+ --rule:rgba(233,228,216,.16);--rule-strong:rgba(233,228,216,.28);--veil:rgba(8,8,6,.96);--panel-hover:#141410;
+ --font-display:'EvaMing','Noto Serif SC','Songti SC',serif;--font-mono:'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace;
+ --t-display:clamp(56px,9vw,148px);--t-h2:clamp(30px,4vw,52px);--t-h3:clamp(19px,1.4vw,26px);--t-body:clamp(16px,1.05vw,19px);--t-label:clamp(12px,.78vw,14px);--t-micro:clamp(11px,.68vw,13px);
+ --s1:8px;--s2:16px;--s3:24px;--s4:40px;--s5:64px;--s6:104px;
+ --cut:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);--wide:min(100% - 2*clamp(16px,4vw,48px),1280px);--shell-header-h:68px;
+ --ease:cubic-bezier(.2,.8,.2,1);--dur-fast:.15s;--dur-boot:.5s;color-scheme:dark;
 }

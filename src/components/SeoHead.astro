@@ -99,4 +99,4 @@ const schemas = [websiteSchema, softwareSchema, faqSchema, breadcrumbSchema]
 <meta name="twitter:title" content={dict.pageTitle} />
 <meta name="twitter:description" content={dict.pageDescription} />
 <meta name="twitter:image" content={imageUrl} />
-<script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schemas)}></script>

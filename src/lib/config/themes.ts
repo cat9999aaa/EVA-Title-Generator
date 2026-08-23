@@ -4,6 +4,8 @@ export interface ThemeOption {
   id: ThemeId
   base: string
   accent: string
+  signal?: string
+  alert?: string
 }
 
 export interface ThemeTokens {
@@ -21,7 +23,7 @@ export interface ThemeTokens {
 }
 
 export const themeOptions: ThemeOption[] = [
-  { id: 'mono',   base: '#000000', accent: '#e8e8e8' },
+  { id: 'mono',   base: '#080806', accent: '#e9e4d8', signal: '#b9d82e', alert: '#d5472b' },
   { id: 'nerv',   base: '#090909', accent: '#ff6a00' },
   { id: 'unit00', base: '#050d14', accent: '#00ccff' },
   { id: 'unit01', base: '#130d1f', accent: '#7cff4f' },

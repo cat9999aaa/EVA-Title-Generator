@@ -54,7 +54,7 @@ export function initGeneratorApp(root: HTMLElement): void {
     series:   query<HTMLInputElement>(root, '#field-series'),
     issue:    query<HTMLInputElement>(root, '#field-issue'),
     date:     query<HTMLInputElement>(root, '#field-date'),
-    title:    query<HTMLInputElement>(root, '#field-title'),
+    title:    query<HTMLTextAreaElement>(root, '#field-title'),
     subtitle: query<HTMLInputElement>(root, '#field-subtitle'),
     author:   query<HTMLInputElement>(root, '#field-author'),
     handle:   query<HTMLInputElement>(root, '#field-handle'),
@@ -196,7 +196,7 @@ export function initGeneratorApp(root: HTMLElement): void {
   })
 
   exportSvgBtn.addEventListener('click', () => {
-    const svg = buildSvgNow(Boolean(embeddedFontCss))
+    const svg = buildSvgNow(false)
     downloadSvg(svg, buildFileName(safeFileStem(state.content.title || 'eva-title'), 'svg'))
   })
 
