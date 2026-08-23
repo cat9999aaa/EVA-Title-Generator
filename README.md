@@ -2,7 +2,7 @@
 
 EVA 风格封面图生成器。支持多种尺寸、多套主题，导出高分辨率 SVG / PNG，全程无需后端。
 
-**在线地址**：部署后填写
+**在线地址**：https://eva.dashen.wang/
 
 ---
 
@@ -10,10 +10,10 @@ EVA 风格封面图生成器。支持多种尺寸、多套主题，导出高分�
 
 | 层 | 技术 |
 |---|---|
-| 框架 | [Astro](https://astro.build) 5 (纯静态输出) |
+| 框架 | [Astro](https://astro.build) 7 (纯静态输出) |
 | 语言 | TypeScript |
-| 样式 | 原生 CSS（无框架） |
-| 部署 | Cloudflare Pages |
+| 样式 | 大神UI原生 Token 与组件语义（原生 CSS，无运行时框架） |
+| 部署 | Cloudflare Pages（GitHub `main` 自动部署） |
 | 字体 | 自托管（EVA 字体 + Inter fallback） |
 
 ---
