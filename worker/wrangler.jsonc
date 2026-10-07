@@ -6,7 +6,8 @@
   "compatibility_date": "2026-10-07",
   "workers_dev": true,
   "routes": [
-    { "pattern": "eva.dashen.wang/api/*", "zone_name": "dashen.wang" }
+    { "pattern": "eva.dashen.wang/api/*", "zone_name": "dashen.wang" },
+    { "pattern": "eva.dashen.wang/*", "zone_name": "dashen.wang" }
   ],
   "compatibility_flags": ["nodejs_compat"],
   "tsconfig": "./tsconfig.json",
@@ -34,7 +35,7 @@
   ],
   "assets": {
     // Eva-Ming OTF lives in the site tts/ folder; bind it instead of duplicating 25MB.
-    "directory": "../tts",
+    "directory": "../dist",
     "binding": "ASSETS",
     "run_worker_first": true,
   },
@@ -51,12 +52,5 @@
       "enabled": true,
       "head_sampling_rate": 1,
     },
-    "traces": {
-      "enabled": true,
-      "head_sampling_rate": 0.01,
-    },
-  },
-  "limits": {
-    "cpu_ms": 60000,
   },
 }

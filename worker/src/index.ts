@@ -390,8 +390,8 @@ export default {
         const source = coverPaths.has(pathname) ? 'api' : 'web'
         return withCors(request, await handleCoverPost(request, env, url, pathname, source))
       }
-      if (request.method !== 'GET' && request.method !== 'POST') {
-        return withCors(request, errorResponse(localeHint, 'METHOD_NOT_ALLOWED'))
+      if (request.method === 'GET' || request.method === 'HEAD') {
+        return env.ASSETS.fetch(request)
       }
       return withCors(request, errorResponse(localeHint, 'NOT_FOUND'))
     } catch (error) {
