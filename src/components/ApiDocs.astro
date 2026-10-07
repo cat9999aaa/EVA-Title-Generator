@@ -1,0 +1,68 @@
+---
+import type { Dictionary } from '@/lib/i18n/types'
+
+const { dict } = Astro.props as { dict: Dictionary }
+const origin = 'https://eva.dashen.wang'
+---
+<section class="dv-info-section">
+  <header class="dv-archive-head">
+    <p>API ／ OPENAPI</p>
+    <h1>{dict.apiDocs.title}</h1>
+    <span>{dict.apiDocs.intro}</span>
+  </header>
+  <article class="dv-info-record">
+    <b>01</b>
+    <h2>{dict.apiDocs.authTitle}</h2>
+    <p>{dict.apiDocs.authBody}</p>
+  </article>
+  <article class="dv-info-record">
+    <b>02</b>
+    <h2>{dict.apiDocs.endpointsTitle}</h2>
+    <p>GET {origin}/api/v1/stats · GET {origin}/api/v1/meta · POST {origin}/api/v1/covers · POST {origin}/api/v1/exports</p>
+  </article>
+  <article class="dv-info-record">
+    <b>03</b>
+    <h2>{dict.apiDocs.examplesTitle}</h2>
+    <p>OpenAPI: {origin}/api/v1/openapi.json</p>
+  </article>
+  <pre class="dv-code"><code>{`curl -sS ${origin}/api/v1/stats
+curl -sS -H "Authorization: Bearer $EVA_API_TOKEN" \\
+  -H "Content-Type: application/json" \\
+  -H "Idempotency-Key: demo-001" \\
+  -d '{"formatId":"article","themeId":"mono","output":"webp","quality":80,"content":{"title":"标题"}}' \\
+  ${origin}/api/v1/covers -o cover.webp`}</code></pre>
+  <pre class="dv-code"><code>{`const res = await fetch('${origin}/api/v1/covers', {
+  method: 'POST',
+  headers: {
+    Authorization: 'Bearer ' + process.env.EVA_API_TOKEN,
+    'Content-Type': 'application/json',
+    'Idempotency-Key': crypto.randomUUID(),
+  },
+  body: JSON.stringify({
+    formatId: 'article',
+    themeId: 'mono',
+    output: 'webp',
+    quality: 80,
+    content: { title: '标题', subtitle: '副标题' },
+  }),
+});
+const blob = await res.blob();`}</code></pre>
+  <pre class="dv-code"><code>{`$ch = curl_init('${origin}/api/v1/covers');
+curl_setopt_array($ch, [
+  CURLOPT_POST => true,
+  CURLOPT_HTTPHEADER => [
+    'Authorization: Bearer ' . getenv('EVA_API_TOKEN'),
+    'Content-Type: application/json',
+    'Idempotency-Key: wp-' . wp_generate_uuid4(),
+  ],
+  CURLOPT_POSTFIELDS => wp_json_encode([
+    'formatId' => 'article',
+    'themeId' => 'mono',
+    'output' => 'webp',
+    'quality' => 80,
+    'content' => ['title' => get_the_title($post)],
+  ]),
+  CURLOPT_RETURNTRANSFER => true,
+]);
+$image = curl_exec($ch);`}</code></pre>
+</section>

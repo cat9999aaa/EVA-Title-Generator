@@ -1,0 +1,13 @@
+---
+import FaqSection from '@/components/FaqSection.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getDictionary, withPage } from '@/lib/i18n'
+
+const dict = withPage(getDictionary('zh-TW'), 'faq')
+---
+
+<BaseLayout dict={dict} page="faq">
+  <div class="site-main">
+    <FaqSection dict={dict} />
+  </div>
+</BaseLayout>

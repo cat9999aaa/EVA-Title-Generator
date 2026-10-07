@@ -1,22 +1,23 @@
 ---
+import LanguageSwitcher from '@/components/LanguageSwitcher.astro'
+import { pageHref, type SitePage } from '@/lib/i18n/locales'
 import type { Dictionary } from '@/lib/i18n/types'
-const { dict, currentPath = Astro.url.pathname } = Astro.props as { dict: Dictionary; currentPath?: string }
-const isChinese = dict.locale === 'zh-CN'
-const prefix = isChinese ? '' : '/en'
+const { dict, page = 'home' } = Astro.props as { dict: Dictionary; page?: SitePage }
 const links = [
-  [isChinese ? '/' : '/en', dict.nav.generator],
-  [`${prefix}/about`, dict.nav.about],
-  [`${prefix}/faq`, dict.nav.faq],
+  [pageHref(dict.locale, 'home'), dict.nav.generator],
+  [pageHref(dict.locale, 'about'), dict.nav.about],
+  [pageHref(dict.locale, 'faq'), dict.nav.faq],
+  [pageHref(dict.locale, 'apiDocs'), dict.nav.apiDocs],
 ]
 ---
 <header class="dv-header">
-  <a class="dv-header__logo" href={isChinese ? '/' : '/en'} aria-label={isChinese ? '大神标题系统首页' : 'Dashen Title System home'}>大神标题<small>DASHEN.TITLE</small></a>
-  <button class="dv-header__menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-toggle>{isChinese ? '菜单' : 'MENU'}</button>
-  <nav id="primary-nav" aria-label={isChinese ? '主导航' : 'Primary navigation'} data-primary-nav>
-    {links.map(([href,label]) => <a href={href} aria-current={currentPath === href || currentPath === `${href}/` ? 'page' : undefined}>{label}</a>)}
+  <a class="dv-header__logo" href={pageHref(dict.locale, 'home')} aria-label={dict.nav.homeAria}>大神标题<small>{dict.chrome.brandSmall}</small></a>
+  <button class="dv-header__menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-toggle>{dict.nav.menu}</button>
+  <nav id="primary-nav" aria-label={dict.nav.primaryNav} data-primary-nav>
+    {links.map(([href,label]) => <a href={href} aria-current={dict.pagePath === href ? 'page' : undefined}>{label}</a>)}
   </nav>
   <div class="dv-header__actions">
-    <a class="dv-header__language" href={isChinese ? '/en' : '/'}>{isChinese ? 'EN' : '中文'}</a>
+    <LanguageSwitcher dict={dict} page={page} />
     <a class="dv-header__business" href="https://dashen.wang/" rel="home">DASHEN.WANG</a>
   </div>
 </header>

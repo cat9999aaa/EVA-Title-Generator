@@ -1,11 +1,14 @@
 ---
+import { SITE_LOCALES, pageHref, type SitePage } from '@/lib/i18n/locales'
 import type { Dictionary } from '@/lib/i18n/types'
 
-const { dict } = Astro.props as { dict: Dictionary }
-const isChinese = dict.locale === 'zh-CN'
+const { dict, page = 'home' } = Astro.props as { dict: Dictionary; page?: SitePage }
 ---
 
 <nav class="language-switcher" aria-label={dict.nav.languageLabel}>
-  <a class="language-link" href="/" data-current={String(isChinese)}>{dict.nav.chinese}</a>
-  <a class="language-link" href="/en" data-current={String(!isChinese)}>{dict.nav.english}</a>
+  {SITE_LOCALES.map((locale) => (
+    <a class="language-link" href={pageHref(locale, page)} data-current={String(locale === dict.locale)} hreflang={locale}>
+      {dict.nav.languages[locale]}
+    </a>
+  ))}
 </nav>

@@ -5,7 +5,7 @@ function triggerDownload(href: string, fileName: string): void {
   link.click()
 }
 
-export function buildFileName(prefix: string, extension: 'png' | 'svg'): string {
+export function buildFileName(prefix: string, extension: 'png' | 'svg' | 'webp'): string {
   const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
   return `${prefix}-${stamp}.${extension}`
 }

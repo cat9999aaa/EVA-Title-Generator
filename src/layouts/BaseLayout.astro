@@ -2,15 +2,16 @@
 import SeoHead from '@/components/SeoHead.astro'
 import DashenHeader from '@/components/DashenHeader.astro'
 import SiteFooter from '@/components/SiteFooter.astro'
+import type { SitePage } from '@/lib/i18n/locales'
 import type { Dictionary } from '@/lib/i18n/types'
 import '@/styles/tokens.css'
 import '@/styles/base.css'
 import '@/styles/generator.css'
 import '@/styles/eva-effects.css'
-const { dict } = Astro.props as { dict: Dictionary }
+const { dict, page = 'about' } = Astro.props as { dict: Dictionary; page?: SitePage }
 ---
 <!DOCTYPE html>
 <html lang={dict.htmlLang}>
   <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="/site.webmanifest"/><SeoHead dict={dict}/></head>
-  <body><a class="dv-skip-link" href="#main-content">{dict.nav.skipToGenerator}</a><div class="dv-site"><DashenHeader dict={dict}/><main class="dv-page dv-info-page" id="main-content"><slot/></main><SiteFooter dict={dict}/></div></body>
+  <body><a class="dv-skip-link" href="#main-content">{dict.nav.skipToGenerator}</a><div class="dv-site"><DashenHeader dict={dict} page={page}/><main class="dv-page dv-info-page" id="main-content"><slot/></main><SiteFooter dict={dict}/></div></body>
 </html>

@@ -1,0 +1,62 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "eva-cover-api",
+  "account_id": "2982b5bf2f28e4c2131ccf3f90613afa",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-07",
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "eva.dashen.wang/api/*", "zone_name": "dashen.wang" }
+  ],
+  "compatibility_flags": ["nodejs_compat"],
+  "tsconfig": "./tsconfig.json",
+  "alias": {
+    "@": "../src",
+  },
+  "vars": {
+    "API_VERSION": "0.1.0",
+  },
+  // Production secrets: wrangler secret put EVA_API_TOKEN
+  // and wrangler secret put TURNSTILE_SECRET. Never commit values.
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "COVER_LEDGER",
+        "class_name": "CoverLedger",
+      },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["CoverLedger"],
+    },
+  ],
+  "assets": {
+    // Eva-Ming OTF lives in the site tts/ folder; bind it instead of duplicating 25MB.
+    "directory": "../tts",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+  },
+  "rules": [
+    {
+      "type": "CompiledWasm",
+      "globs": ["**/*.wasm"],
+      "fallthrough": true,
+    },
+  ],
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.01,
+    },
+  },
+  "limits": {
+    "cpu_ms": 60000,
+  },
+}

@@ -1,6 +1,7 @@
 ---
 import ControlPanel from '@/components/ControlPanel.astro'
 import PreviewStage from '@/components/PreviewStage.astro'
+import { SHARED_STORAGE_KEY } from '@/lib/i18n/locales'
 import { DEFAULT_BACKGROUND_OPACITY, DEFAULT_FORMAT_ID, DEFAULT_THEME_ID } from '@/lib/generator/state'
 import type { Dictionary } from '@/lib/i18n/types'
 
@@ -8,12 +9,17 @@ const { dict } = Astro.props as { dict: Dictionary }
 
 const generatorCopy = {
   locale: dict.locale,
-  storageKey: `eva-title-generator:${dict.locale}`,
+  storageKey: SHARED_STORAGE_KEY,
   previewLabel: dict.generator.previewLabel,
   previewReadyHint: dict.generator.previewReadyHint,
   fontStatusLoading: dict.generator.fontStatusLoading,
   fontStatusReady: dict.generator.fontStatusReady,
   fontStatusFallback: dict.generator.fontStatusFallback,
+  overflowHint: dict.generator.overflowHint,
+  counterUnavailable: dict.generator.counterUnavailable,
+  counterLabel: dict.generator.counterLabel,
+  exportPng: dict.generator.buttons.exportPng,
+  exportWebp: dict.generator.buttons.exportWebp,
   formatCopy: dict.generator.formatCopy,
   themeCopy: dict.generator.themeCopy,
   defaultContent: dict.generator.defaultContent,
@@ -23,7 +29,7 @@ const generatorCopy = {
 }
 ---
 
-<div class="generator-app" data-generator-app>
+<div class="generator-app" data-generator-app data-api-base="/api/v1">
   <script is:inline type="application/json" data-generator-copy set:html={JSON.stringify(generatorCopy)}></script>
   <div class="generator-grid" id="generator-app">
     <ControlPanel dict={dict} />

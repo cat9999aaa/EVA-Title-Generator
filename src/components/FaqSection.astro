@@ -2,4 +2,4 @@
 import type { Dictionary } from '@/lib/i18n/types'
 const { dict } = Astro.props as { dict: Dictionary }
 ---
-<section class="dv-info-section"><header class="dv-archive-head"><p>FAQ ／ SYSTEM NOTES</p><h2>{dict.faq.title}</h2><span>{dict.faq.intro}</span></header><div class="dv-faq-list">{dict.faq.items.map((item,index)=><details class="dv-faq"><summary><b>{String(index+1).padStart(2,'0')}</b>{item.question}</summary><p>{item.answer}</p></details>)}</div></section>
+<section class="dv-info-section"><header class="dv-archive-head"><p>FAQ ／ SYSTEM NOTES</p><h1>{dict.faq.title}</h1><span>{dict.faq.intro}</span></header><div class="dv-faq-list">{dict.faq.items.map((item,index)=><details class="dv-faq"><summary><b>{String(index+1).padStart(2,'0')}</b>{item.question}</summary><p>{item.answer}</p></details>)}</div></section>

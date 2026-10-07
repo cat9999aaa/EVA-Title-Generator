@@ -1,18 +1,20 @@
 ---
 import FontCredit from '@/components/FontCredit.astro'
 import IntroSections from '@/components/IntroSections.astro'
-import SiteFooter from '@/components/SiteFooter.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import { getDictionary } from '@/lib/i18n'
+import { getDictionary, withPage } from '@/lib/i18n'
 
-const dict = getDictionary('en-US')
-const pageDict = { ...dict, pagePath: '/en/about' }
+const dict = withPage(getDictionary('en-US'), 'about')
 ---
 
-<BaseLayout dict={pageDict}>
+<BaseLayout dict={dict} page="about">
   <div class="site-main">
+    <header class="dv-archive-head">
+      <p>ABOUT ／ SYSTEM</p>
+      <h1>{dict.hero.title}</h1>
+      <span>{dict.hero.lead}</span>
+    </header>
     <IntroSections dict={dict} />
     <FontCredit dict={dict} />
-    <SiteFooter dict={dict} />
   </div>
 </BaseLayout>

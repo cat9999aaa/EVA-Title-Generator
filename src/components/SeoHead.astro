@@ -1,15 +1,26 @@
 ---
+import { LOCALE_META, SITE_LOCALES, SITE_ORIGIN, pageHref, type SitePage } from '@/lib/i18n/locales'
 import type { Dictionary } from '@/lib/i18n/types'
 
 const { dict } = Astro.props as { dict: Dictionary }
 
-const site = Astro.site ?? new URL('https://eva-title-generator.pages.dev')
+const site = Astro.site ?? new URL(SITE_ORIGIN)
 const canonicalUrl = new URL(dict.pagePath, site).toString()
 const imageUrl = new URL('/og/eva-title-generator.svg', site).toString()
+const meta = LOCALE_META[dict.locale]
+const currentPage: SitePage = dict.pagePath.endsWith('/api-docs')
+  ? 'apiDocs'
+  : dict.pagePath.endsWith('/about')
+    ? 'about'
+    : dict.pagePath.endsWith('/faq')
+      ? 'faq'
+      : 'home'
 const alternates = [
-  { hrefLang: 'zh-CN', href: new URL('/', site).toString() },
-  { hrefLang: 'en', href: new URL('/en', site).toString() },
-  { hrefLang: 'x-default', href: new URL('/', site).toString() },
+  ...SITE_LOCALES.map((locale) => ({
+    hrefLang: LOCALE_META[locale].hrefLang,
+    href: new URL(pageHref(locale, currentPage), site).toString(),
+  })),
+  { hrefLang: 'x-default', href: new URL(pageHref('zh-CN', currentPage), site).toString() },
 ]
 
 const faqSchema = {
@@ -34,7 +45,7 @@ const softwareSchema = {
   applicationCategory: 'DesignApplication',
   operatingSystem: 'Web Browser',
   browserRequirements: 'Requires JavaScript and a modern browser.',
-  inLanguage: [dict.locale],
+  inLanguage: SITE_LOCALES,
   description: dict.pageDescription,
   url: canonicalUrl,
   image: imageUrl,
@@ -45,10 +56,10 @@ const softwareSchema = {
   },
   featureList: [
     'Centered EVA-style title layout',
-    'PNG export',
+    'PNG and WebP export',
     'SVG export',
-    'Bilingual Chinese and English interface',
-    'X, video, PPT, and WeChat cover sizes',
+    'Five-language interface',
+    'Article, square, promo, and social cover sizes',
   ],
   isBasedOn: 'https://github.com/kaonashi-tyc/Eva-Ming-Simplified',
 }
@@ -59,7 +70,7 @@ const websiteSchema = {
   name: 'EVA标题生成器',
   alternateName: 'EVA Title Generator',
   url: site.toString(),
-  inLanguage: ['zh-CN', 'en-US'],
+  inLanguage: SITE_LOCALES,
   description: dict.pageDescription,
 }
 
@@ -70,7 +81,7 @@ const breadcrumbSchema = {
     {
       '@type': 'ListItem',
       position: 1,
-      name: dict.locale === 'zh-CN' ? '首页' : 'Home',
+      name: dict.chrome.homeCrumb,
       item: canonicalUrl,
     },
   ],
@@ -94,7 +105,10 @@ const schemas = [websiteSchema, softwareSchema, faqSchema, breadcrumbSchema]
 <meta property="og:description" content={dict.pageDescription} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={imageUrl} />
-<meta property="og:locale" content={dict.locale === 'zh-CN' ? 'zh_CN' : 'en_US'} />
+<meta property="og:locale" content={meta.ogLocale} />
+{SITE_LOCALES.filter((locale) => locale !== dict.locale).map((locale) => (
+  <meta property="og:locale:alternate" content={LOCALE_META[locale].ogLocale} />
+))}
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={dict.pageTitle} />
 <meta name="twitter:description" content={dict.pageDescription} />

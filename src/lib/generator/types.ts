@@ -1,6 +1,9 @@
 import type { FormatId } from '@/lib/config/formats'
 import type { ThemeId } from '@/lib/config/themes'
 
+export type DateMode = 'auto' | 'manual' | 'hidden'
+export type ExportKind = 'png' | 'webp'
+
 export interface GeneratorContent {
   series: string
   issue: string
@@ -10,6 +13,7 @@ export interface GeneratorContent {
   author: string
   handle: string
   site: string
+  mark: string
 }
 
 export interface GeneratorState {
@@ -17,6 +21,10 @@ export interface GeneratorState {
   themeId: ThemeId
   backgroundUrl: string | null
   backgroundOpacity: number
+  exportScale: 1 | 2
+  exportKind: ExportKind
+  exportQuality: number
+  dateMode: DateMode
   content: GeneratorContent
 }
 
@@ -37,6 +45,11 @@ export interface GeneratorCopy {
   fontStatusLoading: string
   fontStatusReady: string
   fontStatusFallback: string
+  overflowHint: string
+  counterUnavailable: string
+  counterLabel: string
+  exportPng: string
+  exportWebp: string
   formatCopy: Record<FormatId, { label: string; hint: string }>
   themeCopy: Record<ThemeId, { label: string; note: string }>
   defaultContent: GeneratorContent

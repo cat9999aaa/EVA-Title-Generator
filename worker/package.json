@@ -1,0 +1,21 @@
+{
+  "name": "eva-cover-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "test": "node --test tests/*.mjs",
+    "types": "wrangler types"
+  },
+  "dependencies": {
+    "@jsquash/webp": "1.5.0",
+    "@resvg/resvg-wasm": "2.6.2"
+  },
+  "devDependencies": {
+    "wrangler": "4.148.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "workerd@1.20261006.1": true
+  }
+}

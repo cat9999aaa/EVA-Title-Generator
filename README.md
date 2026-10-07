@@ -1,6 +1,6 @@
 # EVA Title Generator
 
-EVA 风格封面图生成器。支持多种尺寸、多套主题，导出高分辨率 SVG / PNG，全程无需后端。
+EVA 风格封面图生成器。五语界面（`/` 简体、`/zh-tw`、`/ja`、`/en`、`/ko`），标题副标题各一行居中。导出 PNG / WebP / SVG。网页预览在浏览器完成；HTTP API 在 `worker/`（Durable Object 计数起点 13514）。
 
 **在线地址**：https://eva.dashen.wang/
 
@@ -13,7 +13,7 @@ EVA 风格封面图生成器。支持多种尺寸、多套主题，导出高分�
 | 框架 | [Astro](https://astro.build) 7 (纯静态输出) |
 | 语言 | TypeScript |
 | 样式 | 大神UI原生 Token 与组件语义（原生 CSS，无运行时框架） |
-| 部署 | Cloudflare Pages（GitHub `main` 自动部署） |
+| 部署 | Cloudflare Pages 前端 + Worker `eva-cover-api` |
 | 字体 | 自托管（EVA 字体 + Inter fallback） |
 
 ---
@@ -103,7 +103,9 @@ dist/
 
 5. 点击 **Save and Deploy**
 
-部署完成后 Cloudflare 会分配一个 `*.pages.dev` 域名。
+生产域名为 `https://eva.dashen.wang`。`robots.txt` / `llms.txt` 已指向该域名，不再使用 `pages.dev`。
+
+封面 HTTP API 在 `worker/`。本地：`cd worker && npm install && npm test`。上线需要本机已登录的 Wrangler，并把 `EVA_API_TOKEN`、`TURNSTILE_SECRET` 用 `wrangler secret put` 写入，不要写进仓库。
 
 #### 已绑定仓库后如何更新站点
 

@@ -1,31 +1,65 @@
-import type { FormatOption } from '@/lib/config/formats'
+import { pngPixels, type FormatOption } from '@/lib/config/formats'
+import type { ExportKind } from '@/lib/generator/types'
 
-export async function exportPng(svgMarkup: string, format: FormatOption, fileName: string): Promise<void> {
+export function clampQuality(quality: number): number {
+  if (!Number.isFinite(quality)) {
+    return 80
+  }
+  return Math.min(100, Math.max(1, Math.round(quality)))
+}
+
+export async function rasterizeSvg(
+  svgMarkup: string,
+  format: FormatOption,
+  scale: number = format.defaultScale,
+  kind: ExportKind = 'png',
+  quality: number = 80,
+): Promise<{ blob: Blob; width: number; height: number; mime: string }> {
   const blob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' })
   const url = URL.createObjectURL(blob)
+  const pixels = pngPixels(format, scale)
 
   try {
     const image = await loadImage(url)
     const canvas = document.createElement('canvas')
-    canvas.width = format.width * 2
-    canvas.height = format.height * 2
+    canvas.width = pixels.width
+    canvas.height = pixels.height
     const context = canvas.getContext('2d')
 
     if (!context) {
       throw new Error('Canvas context unavailable')
     }
 
-    context.scale(2, 2)
+    context.scale(pixels.width / format.width, pixels.height / format.height)
     context.drawImage(image, 0, 0)
 
-    const href = canvas.toDataURL('image/png')
-    const link = document.createElement('a')
-    link.href = href
-    link.download = fileName
-    link.click()
+    const mime = kind === 'webp' ? 'image/webp' : 'image/png'
+    const href = kind === 'webp'
+      ? canvas.toDataURL(mime, clampQuality(quality) / 100)
+      : canvas.toDataURL(mime)
+    const raster = await (await fetch(href)).blob()
+    return { blob: raster, width: pixels.width, height: pixels.height, mime }
   } finally {
     URL.revokeObjectURL(url)
   }
+}
+
+export async function exportPng(
+  svgMarkup: string,
+  format: FormatOption,
+  fileName: string,
+  scale: number = format.defaultScale,
+  kind: ExportKind = 'png',
+  quality: number = 80,
+): Promise<{ width: number; height: number }> {
+  const raster = await rasterizeSvg(svgMarkup, format, scale, kind, quality)
+  const href = URL.createObjectURL(raster.blob)
+  const link = document.createElement('a')
+  link.href = href
+  link.download = fileName
+  link.click()
+  window.setTimeout(() => URL.revokeObjectURL(href), 500)
+  return { width: raster.width, height: raster.height }
 }
 
 function loadImage(src: string): Promise<HTMLImageElement> {

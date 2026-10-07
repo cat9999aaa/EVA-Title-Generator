@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eva-title-generator.pages.dev/sitemap-index.xml
+Sitemap: https://eva.dashen.wang/sitemap-index.xml
